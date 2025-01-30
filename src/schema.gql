@@ -1,0 +1,118 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type WeatherCoord {
+  lon: Float!
+  lat: Float!
+}
+
+type WeatherDescription {
+  id: Float!
+  main: String!
+  description: String!
+  icon: String!
+}
+
+type WeatherMain {
+  temp: Float!
+  feels_like: Float!
+  temp_min: Float!
+  temp_max: Float!
+  pressure: Float!
+  humidity: Float!
+  sea_level: Float!
+  grnd_level: Float!
+}
+
+type WeatherWind {
+  speed: Float!
+  deg: Float!
+}
+
+type WeatherSys {
+  type: Float!
+  id: Float!
+  country: String!
+  sunrise: Float!
+  sunset: Float!
+}
+
+type WeatherClouds {
+  all: Float!
+}
+
+type WeatherResponse {
+  coord: WeatherCoord!
+  weather: [WeatherDescription!]!
+  base: String!
+  main: WeatherMain!
+  visibility: Float!
+  wind: WeatherWind!
+  clouds: WeatherClouds!
+  dt: Float!
+  sys: WeatherSys!
+  timezone: Float!
+  id: Float!
+  name: String!
+  cod: Float!
+}
+
+type ForecastMain {
+  temp: Float!
+  feels_like: Float!
+  temp_min: Float!
+  temp_max: Float!
+  pressure: Float!
+  humidity: Float!
+  sea_level: Float!
+  grnd_level: Float!
+}
+
+type ForecastWeather {
+  id: Float!
+  main: String!
+  description: String!
+  icon: String!
+}
+
+type ForecastWind {
+  speed: Float!
+  deg: Float!
+}
+
+type ForecastClouds {
+  all: Float!
+}
+
+type ForecastItem {
+  dt: Float!
+  main: ForecastMain!
+  weather: [ForecastWeather!]!
+  clouds: ForecastClouds!
+  wind: ForecastWind!
+  dt_txt: String!
+}
+
+type ForecastCity {
+  id: Float!
+  name: String!
+  country: String!
+  population: Float!
+  timezone: Float!
+  sunrise: Float!
+  sunset: Float!
+}
+
+type WeatherForecastResponse {
+  cod: String!
+  message: Float!
+  cnt: Float!
+  list: [ForecastItem!]!
+  city: ForecastCity!
+}
+
+type Query {
+  getCurrentWeather(city: String!): WeatherResponse!
+  getForecast(city: String!): WeatherForecastResponse!
+}
