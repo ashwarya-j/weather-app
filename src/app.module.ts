@@ -35,7 +35,7 @@ import { APP_GUARD } from '@nestjs/core';
     ]),
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      playground: true, // Enables GraphQL playground
+      playground: true,
       driver: ApolloDriver,
     }),
     LocationsModule,
