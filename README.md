@@ -60,7 +60,15 @@ The Weather API uses a Stale-While-Revalidate caching strategy to improve perfor
    ```bash
    npm run start
    ```
-4. The API will be available at `http://localhost:3000`.
+4. Run the test:
+   ```bash
+   npm run test
+   ```
+5. The API will be available at `http://localhost:3000`.
+
+## Testing
+
+Postman collections for testing the API are provided in the `thunder-collections` folder in the root directory. You can import these collections into Postman or Thunder Client to test the API endpoints.
 
 ## Contributing
 

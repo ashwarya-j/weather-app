@@ -1,0 +1,94 @@
+{
+    "info": {
+        "_postman_id": "af48cfc4-43a4-4c5f-8e6b-735f6c475b5b",
+        "name": "Weather",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": ""
+    },
+    "item": [
+        {
+            "name": "REST: Fetch Weather ",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:3000/weather/London",
+                    "path": [
+                        "weather",
+                        "London"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000"
+                }
+            }
+        },
+        {
+            "name": "REST: Fetch Forecast",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:3000/weather/forecast/London",
+                    "path": [
+                        "weather",
+                        "forecast",
+                        "London"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000"
+                }
+            }
+        },
+        {
+            "name": "GraphQL: Fetch Weather ",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "http://localhost:3000/graphql",
+                    "path": [
+                        "graphql"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000"
+                },
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query {\n  getCurrentWeather(city: \"London\") {\n    coord {\n      lon\n      lat\n    }\n    weather {\n      id\n      main\n      description\n      icon\n    }\n    main {\n      temp\n      feels_like\n      temp_min\n      temp_max\n      pressure\n      humidity\n    }\n    wind {\n      speed\n      deg\n    }\n    sys {\n      type\n      id\n      country\n      sunrise\n      sunset\n    }\n    timezone\n    id\n    name\n    cod\n  }\n}\n"
+                    }
+                }
+            }
+        },
+        {
+            "name": "GraphQL: Fetch Forecast",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "http://localhost:3000/graphql",
+                    "path": [
+                        "graphql"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000"
+                },
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query GetWeatherForecast($city: String!) {\n  getForecast(city: $city) {\n    cod\n    message\n    cnt\n    list {\n      dt\n      main {\n        temp\n        feels_like\n        temp_min\n        temp_max\n        pressure\n        humidity\n        sea_level\n        grnd_level\n      }\n      weather {\n        id\n        main\n        description\n        icon\n      }\n      clouds {\n        all\n      }\n      wind {\n        speed\n        deg\n      }\n      dt_txt\n    }\n    city {\n      id\n      name\n      country\n      population\n      timezone\n      sunrise\n      sunset\n    }\n  }\n}\n",
+                        "variables": "{\n  \"city\": \"London\"\n}"
+                    }
+                }
+            }
+        }
+    ]
+}
