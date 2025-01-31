@@ -12,6 +12,11 @@ export class WeatherService {
 
   constructor(private readonly cacheService: CacheService) {}
 
+  /**
+   * Get current weather data for a city.
+   * @param city The name of the city.
+   * @returns The current weather data.
+   */
   async getCurrentWeather(city: string): Promise<WeatherResponse> {
     return this.getCachedData<WeatherResponse>(
       `weather:${city}`,
@@ -21,6 +26,11 @@ export class WeatherService {
     );
   }
 
+  /**
+   * Get weather forecast data for a city.
+   * @param city The name of the city.
+   * @returns The weather forecast data.
+   */
   async getForecast(city: string): Promise<WeatherForecastResponse> {
     return this.getCachedData<WeatherForecastResponse>(
       `forecast:${city}`,
@@ -31,7 +41,12 @@ export class WeatherService {
   }
 
   /**
-   * A reusable method for getting cached data or fetching fresh data from API
+   * A reusable method for getting cached data or fetching fresh data from API.
+   * @param cacheKey The cache key.
+   * @param endpoint The API endpoint.
+   * @param city The name of the city.
+   * @param ttl The time-to-live for the cache.
+   * @returns The cached or fetched data.
    */
   private async getCachedData<T>(
     cacheKey: string,
@@ -50,7 +65,9 @@ export class WeatherService {
   }
 
   /**
-   * Fetch data from the external API
+   * Fetch data from the external API.
+   * @param url The API URL.
+   * @returns The fetched data.
    */
   private async fetchFromAPI<T>(url: string): Promise<T> {
     try {
