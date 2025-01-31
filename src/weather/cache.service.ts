@@ -1,6 +1,11 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { Cache } from 'cache-manager';
 
+/**
+ * CacheService is responsible for handling caching operations.
+ * It provides methods to store data in the cache and retrieve it, using a cache manager.
+ * Implements a Stale-While-Revalidate caching strategy for optimizing the fetching of data.
+ */
 @Injectable()
 export class CacheService {
   private readonly DEFAULT_TTL = 300 * 1000; // 5 minutes in milliseconds
@@ -8,8 +13,12 @@ export class CacheService {
   constructor(@Inject('CACHE_MANAGER') private readonly cacheManager: Cache) {}
 
   /**
-   * Retrieve cached data by key.
-   * If data is not found, fetch fresh data, store it in cache, and return it.
+   * Retrieves data from the cache. If the data is not found, it fetches fresh data, stores it in the cache, and returns it.
+   * Implements Stale-While-Revalidate: if cached data is available, it's returned immediately, and fresh data is fetched in the background.
+   * @param cacheKey The cache key used to store and retrieve the data.
+   * @param fetchFunction A function that fetches fresh data if a cache miss occurs.
+   * @param ttl The time-to-live (TTL) for the cache in milliseconds. Defaults to 5 minutes.
+   * @returns The cached or freshly fetched data.
    */
   async get<T>(
     cacheKey: string,
@@ -45,7 +54,11 @@ export class CacheService {
   }
 
   /**
-   * Store data in cache with the given TTL.
+   * Stores data in the cache with the given TTL.
+   * @param cacheKey The cache key used to store the data.
+   * @param data The data to be stored in the cache.
+   * @param ttl The time-to-live (TTL) for the cache in milliseconds. Defaults to 5 minutes.
+   * @returns A promise that resolves when the data is successfully stored in the cache.
    */
   async set<T>(
     cacheKey: string,
