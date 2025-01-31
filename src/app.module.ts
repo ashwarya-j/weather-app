@@ -29,8 +29,8 @@ import { APP_GUARD } from '@nestjs/core';
     }),
     ThrottlerModule.forRoot([
       {
-        ttl: 60 * 60 * 1000,
-        limit: 10,
+        ttl: parseInt(process.env.THROTTLE_TTL || '3600009', 10),
+        limit: parseInt(process.env.THROTTLE_LIMIT || '10', 10),
       },
     ]),
     GraphQLModule.forRoot({
